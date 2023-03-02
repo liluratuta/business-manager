@@ -3,14 +3,14 @@ using Scripts.Components.Business;
 
 namespace Scripts.Services
 {
-    public class IncomeService
+    public class IncomeService : IService
     {
         private readonly EcsWorld _world;
         private readonly StaticDataService _staticDataService;
 
-        public IncomeService(EcsWorld world, StaticDataService staticDataService)
+        public IncomeService(EcsSystemsProvider ecsSystemsProvider, StaticDataService staticDataService)
         {
-            _world = world;
+            _world = ecsSystemsProvider.Systems.GetWorld();
             _staticDataService = staticDataService;
         }
 

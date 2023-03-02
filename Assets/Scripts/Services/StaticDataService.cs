@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Scripts.Services
 {
-    public class StaticDataService
+    public class StaticDataService : IService
     {
         private const string BusinessesPath = "StaticData/Businesses";
         private const string GameStartDataPath = "StaticData/GameStartData";

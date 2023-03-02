@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts.Services
 {
-    public class SaveLoadService
+    public class SaveLoadService : IService
     {
         private const string ProgressKey = "Progress";
 

@@ -3,13 +3,13 @@ using Scripts.Components.Business;
 
 namespace Scripts.Services
 {
-    public class LevelUpService
+    public class LevelUpService : IService
     {
         private readonly EcsWorld _world;
 
-        public LevelUpService(EcsWorld world)
+        public LevelUpService(EcsSystemsProvider ecsSystemsProvider)
         {
-            _world = world;
+            _world = ecsSystemsProvider.Systems.GetWorld();
         }
 
         public void LevelUp(BusinessID businessID)

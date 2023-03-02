@@ -6,13 +6,13 @@ using Scripts.Extensions;
 
 namespace Scripts.Services
 {
-    public class EntitiesSaveService
+    public class EntitiesSaveService : IService
     {
         private readonly EcsWorld _world;
 
-        public EntitiesSaveService(EcsWorld world)
+        public EntitiesSaveService(EcsSystemsProvider ecsSystemsProvider)
         {
-            _world = world;
+            _world = ecsSystemsProvider.Systems.GetWorld();
         }
 
         public void SendSaveRequest()

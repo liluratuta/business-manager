@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Scripts.Views.Factories
 {
-    public class UIFactory
+    public class UIFactory : IService
     {
         private const string UIRootPath = "UI/UIRoot";
         private const string BusinessesWindowPath = "UI/BusinessesWindow";
@@ -21,13 +21,13 @@ namespace Scripts.Views.Factories
         private Transform _uiRoot;
 
         public UIFactory(AssetsProvider assetsProvider,
-            EcsWorld world,
+            EcsSystemsProvider ecsSystemsProvider,
             LocalizationService localizationService,
             LevelUpService levelUpService,
             StaticDataService staticDataService)
         {
             _assetsProvider = assetsProvider;
-            _world = world;
+            _world = ecsSystemsProvider.Systems.GetWorld();
             _localizationService = localizationService;
             _levelUpService = levelUpService;
             _staticDataService = staticDataService;

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Scripts.Services
 {
-    public class ProgressService
+    public class ProgressService : IService
     {
         private readonly SaveLoadService _saveLoadService;
         private readonly StaticDataService _staticDataService;
