@@ -20,7 +20,6 @@ namespace Scripts.Systems.Wallet
             world.GetPool<WalletComponent>().Add(entity);
             world.GetPool<WalletUIProviderComponent>().Add(entity);
             world.GetPool<WalletTransactionsComponent>().Add(entity);
-            world.GetPool<WalletChangedEvent>().Add(entity);
 
             ref var walletComponent = ref world.GetPool<WalletComponent>().Get(entity);
             walletComponent.Amount = _progressService.WalletAmount();

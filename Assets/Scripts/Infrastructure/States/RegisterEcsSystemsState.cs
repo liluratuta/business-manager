@@ -43,6 +43,7 @@ namespace Scripts.Infrastructure.States
                     _services.Single<IncomeService>(),
                     _services.Single<ProgressService>()))
 
+                .OneFrame<WalletChangedEvent>()
                 .Add(new WalletTransactionsApproveSystem())
 
                 .Add(new CreateBusinessesUISystem(
@@ -52,17 +53,17 @@ namespace Scripts.Infrastructure.States
                 .Add(new LevelUpdateUISystem())
 
                 .OneFrame<LevelUpgradedEvent>()
-                .OneFrame<LevelUpRequest>()
                 .Add(new LevelUpSystem(_services.Single<LevelCostService>()))
-
-                .Add(new TimerSystem(_services.Single<DeltaTimeProvider>()))
+                .OneFrame<LevelUpRequest>()
+                
                 .OneFrame<IncomeCollectRequest>()
+                .Add(new TimerSystem(_services.Single<DeltaTimeProvider>()))
+                
                 .Add(new IncomeCollectSystem())
 
                 .Add(new IncomeUpgradeSystem(_services.Single<IncomeService>()))
 
                 .Add(new WalletUISystem())
-                .OneFrame<WalletChangedEvent>()
 
                 .Add(new LevelButtonStateUISystem())
 
