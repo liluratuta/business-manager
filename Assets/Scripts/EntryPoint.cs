@@ -1,3 +1,4 @@
+using System;
 using Scripts.Infrastructure.States;
 using Scripts.Services;
 using UnityEngine;
@@ -7,13 +8,19 @@ namespace Scripts.Infrastructure
     public class EntryPoint : MonoBehaviour
     {
         private Game _game;
-        private MonoUpdater _updater;
+        private AllServices _services;
         
         private void Awake()
         {
-            _updater = gameObject.AddComponent<MonoUpdater>();
-            _game = new Game(_updater);
+            _services = AllServices.Container;
+            RegisterMonoServices();
+            _game = new Game(_services);
             _game.StateMachine.Enter<BootstrapState>();
+        }
+
+        private void RegisterMonoServices()
+        {
+            _services.RegisterSingle<IUpdater>(gameObject.AddComponent<MonoUpdater>());
         }
 
         private void OnDestroy()

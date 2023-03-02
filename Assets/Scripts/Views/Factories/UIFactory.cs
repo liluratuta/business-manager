@@ -2,6 +2,7 @@ using Leopotam.EcsLite;
 using Scripts.Components.Business;
 using Scripts.Components.Wallet;
 using Scripts.Extensions;
+using Scripts.Infrastructure.States;
 using Scripts.Services;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ namespace Scripts.Views.Factories
         private readonly LocalizationService _localizationService;
         private readonly LevelUpService _levelUpService;
         private readonly StaticDataService _staticDataService;
+
         private Transform _uiRoot;
 
         public UIFactory(AssetsProvider assetsProvider,

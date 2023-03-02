@@ -1,4 +1,5 @@
-﻿using Scripts.ProgressData;
+﻿using System;
+using Scripts.ProgressData;
 using UnityEngine;
 
 namespace Scripts.Services
@@ -24,5 +25,8 @@ namespace Scripts.Services
             var json = JsonUtility.ToJson(progress);
             PlayerPrefs.SetString(ProgressKey, json);
         }
+
+        public void ResetProgress() => 
+            PlayerPrefs.SetString(ProgressKey, String.Empty);
     }
 }

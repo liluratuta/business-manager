@@ -27,6 +27,9 @@ namespace Scripts.Services
         public void SaveProgress() => 
             _saveLoadService.SaveProgress(_progress);
 
+        public void ResetProgress() =>
+            _saveLoadService.ResetProgress();
+
         public double WalletAmount() =>
             _progress.WalletAmount;
 

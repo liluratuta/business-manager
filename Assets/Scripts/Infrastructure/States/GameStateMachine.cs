@@ -5,20 +5,20 @@ using Scripts.Services;
 
 namespace Scripts.Infrastructure.States
 {
-    public class GameStateMachine
+    public class GameStateMachine : IService
     {
         private readonly Dictionary<Type, IState> _states;
         
         private IState _activeState;
 
-        public GameStateMachine(EcsWorld ecsWorld, MonoUpdater monoUpdater)
+        public GameStateMachine(EcsWorld ecsWorld, AllServices services)
         {
             _states = new Dictionary<Type, IState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, AllServices.Container, ecsWorld, monoUpdater),
-                [typeof(RegisterEcsSystemsState)] = new RegisterEcsSystemsState(this, AllServices.Container),
-                [typeof(GameLoopState)] = new GameLoopState(AllServices.Container),
-                [typeof(CompleteGameState)] = new CompleteGameState(AllServices.Container)
+                [typeof(BootstrapState)] = new BootstrapState(this, services, ecsWorld),
+                [typeof(RegisterEcsSystemsState)] = new RegisterEcsSystemsState(this, services),
+                [typeof(GameLoopState)] = new GameLoopState(services),
+                [typeof(CompleteGameState)] = new CompleteGameState(services)
             };
         }
 

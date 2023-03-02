@@ -1,7 +1,6 @@
-using Scripts.Infrastructure.States;
 using Scripts.Services;
 
-namespace Scripts.Infrastructure
+namespace Scripts.Infrastructure.States
 {
     public class CompleteGameState : IState
     {

@@ -10,10 +10,10 @@ namespace Scripts.Infrastructure
 
         private EcsWorld _world;
 
-        public Game(MonoUpdater monoUpdater)
+        public Game(AllServices services)
         {
             _world = new EcsWorld();
-            StateMachine = new GameStateMachine(_world, monoUpdater);
+            StateMachine = new GameStateMachine(_world, services);
         }
 
         public void Complete()

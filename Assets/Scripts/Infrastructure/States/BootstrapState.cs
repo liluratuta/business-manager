@@ -11,13 +11,11 @@ namespace Scripts.Infrastructure.States
         private readonly EcsWorld _ecsWorld;
         private readonly MonoUpdater _monoUpdater;
 
-        public BootstrapState(GameStateMachine gameStateMachine, AllServices services, EcsWorld ecsWorld,
-            MonoUpdater monoUpdater)
+        public BootstrapState(GameStateMachine gameStateMachine, AllServices services, EcsWorld ecsWorld)
         {
             _gameStateMachine = gameStateMachine;
             _services = services;
             _ecsWorld = ecsWorld;
-            _monoUpdater = monoUpdater;
         }
 
         public void Enter()
@@ -37,7 +35,7 @@ namespace Scripts.Infrastructure.States
 
         private void RegisterServices()
         {
-            _services.RegisterSingle<IUpdater>(_monoUpdater);
+            _services.RegisterSingle(_gameStateMachine);
             _services.RegisterSingle(new EcsSystemsProvider(new EcsSystems(_ecsWorld)));
             _services.RegisterSingle(new StaticDataService());
             _services.RegisterSingle(new DeltaTimeProvider());
