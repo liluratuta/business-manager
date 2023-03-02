@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c9125ce4e59304c8f357773c92106e, type: 3}
+  m_Name: BusinessData_4
+  m_EditorClassIdentifier: 
+  BusinessID: 4
+  NameKey: Business4
+  RevenueDelay: 17
+  BaseCost: 1000
+  BaseIncome: 1000
+  Improvements:
+  - NameKey: 
+    Cost: 0
+    Multiplier: 0
+  - NameKey: 
+    Cost: 0
+    Multiplier: 0
