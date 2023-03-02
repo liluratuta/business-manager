@@ -2,9 +2,14 @@
 {
     public class LocalizationService : IService
     {
-        public string Localize(string key)
+        private readonly StaticDataService _staticDataService;
+
+        public LocalizationService(StaticDataService staticDataService)
         {
-            return $"[{key}]";
+            _staticDataService = staticDataService;
         }
+
+        public string Localize(string key) => 
+            _staticDataService.LocaleFor(key) ?? $"[{key}]";
     }
 }

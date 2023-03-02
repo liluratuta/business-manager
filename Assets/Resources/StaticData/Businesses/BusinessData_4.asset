@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BusinessData_4
   m_EditorClassIdentifier: 
   BusinessID: 4
-  NameKey: Business4
+  NameKey: business4
   RevenueDelay: 17
   BaseCost: 1000
   BaseIncome: 1000

@@ -43,10 +43,12 @@ namespace Scripts.Views.Factories
             ref var uiProvider = ref _world.GetPool<BusinessUIProviderComponent>().Get(businessEntity);
             ref BusinessComponent businessComponent = ref _world.GetPool<BusinessComponent>().Get(businessEntity);
 
-            uiProvider.LevelView = view.GetComponentInChildren<LevelView>();
+            var levelView = view.GetComponentInChildren<LevelView>();
+            levelView.Init(_localizationService);
+            uiProvider.LevelView = levelView;
 
             var levelUpButtonView = view.GetComponentInChildren<LevelUpButtonView>();
-            levelUpButtonView.Init(_levelUpService);
+            levelUpButtonView.Init(_levelUpService, _localizationService);
             levelUpButtonView.SetBusinessID(businessComponent.BusinessID);
             uiProvider.LevelUpButtonView = levelUpButtonView;
 
@@ -55,6 +57,7 @@ namespace Scripts.Views.Factories
             uiProvider.TimerView = timerView;
 
             var incomeView = view.GetComponentInChildren<IncomeView>();
+            incomeView.Init(_localizationService);
             uiProvider.IncomeView = incomeView;
 
             var businessNameView = view.GetComponentInChildren<BusinessNameView>();
@@ -68,10 +71,15 @@ namespace Scripts.Views.Factories
         {
             var prefab = _assetsProvider.FromResources(BusinessesWindowPath);
             var view = Object.Instantiate(prefab.GetComponent<BusinessesWindow>(), _uiRoot);
+            var walletEntity = _world.FirstEntityWith<WalletComponent>();
+            ref var uiProvider = ref _world.GetPool<WalletUIProviderComponent>().Get(walletEntity);
 
             var walletView = view.GetComponentInChildren<WalletView>();
-            var walletEntity = _world.FirstEntityWith<WalletComponent>();
-            _world.GetPool<WalletUIProviderComponent>().Get(walletEntity).WalletView = walletView;
+            walletView.Init(_localizationService);
+            uiProvider.WalletView = walletView;
+
+            var resetProgressButton = view.GetComponentInChildren<ResetProgressButton>();
+            resetProgressButton.Init(_localizationService);
 
             return view;
         }

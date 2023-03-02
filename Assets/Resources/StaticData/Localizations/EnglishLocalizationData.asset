@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 135e24f6898644d2aff8207a50916f86, type: 3}
+  m_Name: EnglishLocalizationData
+  m_EditorClassIdentifier: 
+  LocalizationType: 1
+  KeyValuePairs:
+  - Key: business1
+    Value: Kebab House
+  - Key: business2
+    Value: Cafe
+  - Key: business3
+    Value: Restaurant
+  - Key: business4
+    Value: Hotel
+  - Key: business5
+    Value: Casino
+  - Key: level_up
+    Value: LVL UP
+  - Key: level
+    Value: LVL
+  - Key: income
+    Value: Income
+  - Key: cost
+    Value: Cost
+  - Key: wallet_amount
+    Value: Balance
+  - Key: reset_progress
+    Value: Reset Progress

@@ -1,5 +1,6 @@
 using Leopotam.EcsLite;
 using Scripts.Services;
+using Scripts.StaticData;
 using Scripts.Views.Factories;
 
 namespace Scripts.Infrastructure.States
@@ -22,8 +23,12 @@ namespace Scripts.Infrastructure.States
         {
             RegisterServices();
             
-            _services.Single<StaticDataService>().LoadBusinesses();
-            _services.Single<StaticDataService>().LoadGameStartData();
+            var staticDataService = _services.Single<StaticDataService>();
+            
+            staticDataService.LoadBusinesses();
+            staticDataService.LoadGameStartData();
+            staticDataService.LoadLocalization(LocalizationType.English);
+            
             _services.Single<ProgressService>().LoadProgress();
             
             _gameStateMachine.Enter<RegisterEcsSystemsState>();
@@ -40,7 +45,7 @@ namespace Scripts.Infrastructure.States
             _services.RegisterSingle(new StaticDataService());
             _services.RegisterSingle(new DeltaTimeProvider());
             _services.RegisterSingle(new AssetsProvider());
-            _services.RegisterSingle(new LocalizationService());
+            _services.RegisterSingle(new LocalizationService(_services.Single<StaticDataService>()));
             _services.RegisterSingle(new LevelUpService(_services.Single<EcsSystemsProvider>()));
             
             _services.RegisterSingle(new UIFactory(
