@@ -27,5 +27,11 @@ namespace Scripts.Infrastructure
         {
             _game.Complete();
         }
+
+        private void OnApplicationPause(bool pause)
+        {
+            if (pause)
+                _game.OnPause();
+        }
     }
 }

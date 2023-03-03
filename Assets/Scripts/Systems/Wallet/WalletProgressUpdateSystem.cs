@@ -5,7 +5,7 @@ using Scripts.Services;
 
 namespace Scripts.Systems.Wallet
 {
-    public class WalletProgressUpdateSystem : IEcsDestroySystem
+    public class WalletProgressUpdateSystem : IEcsDestroySystem, IEcsSaveSystem
     {
         private readonly ProgressService _progressService;
 
@@ -15,6 +15,16 @@ namespace Scripts.Systems.Wallet
         }
 
         public void Destroy(IEcsSystems systems)
+        {
+            UpdateProgress(systems);
+        }
+
+        public void Save(IEcsSystems systems)
+        {
+            UpdateProgress(systems);
+        }
+
+        private void UpdateProgress(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             var saveRequestFilter = world.Filter<SaveRequest>().Inc<WalletComponent>().End();

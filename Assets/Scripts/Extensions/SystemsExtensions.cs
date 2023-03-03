@@ -21,5 +21,13 @@ namespace Scripts.Extensions
 
             return -1;
         }
+
+        public static void Save(this EcsSystems systems)
+        {
+            var allSystems = systems.GetAllSystems();
+
+            foreach (var system in allSystems)
+                (system as IEcsSaveSystem)?.Save(systems);
+        }
     }
 }

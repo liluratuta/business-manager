@@ -24,6 +24,7 @@ namespace Scripts.Services
         {
             var json = JsonUtility.ToJson(progress);
             PlayerPrefs.SetString(ProgressKey, json);
+            PlayerPrefs.Save();
         }
 
         public void ResetProgress() => 
