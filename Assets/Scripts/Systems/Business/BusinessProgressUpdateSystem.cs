@@ -7,7 +7,7 @@ using Scripts.Services;
 
 namespace Scripts.Systems.Business
 {
-    public class BusinessProgressUpdateSystem : IEcsDestroySystem
+    public class BusinessProgressUpdateSystem : IEcsDestroySystem, IEcsSaveSystem
     {
         private readonly ProgressService _progressService;
 
@@ -17,6 +17,16 @@ namespace Scripts.Systems.Business
         }
 
         public void Destroy(IEcsSystems systems)
+        {
+            UpdateProgress(systems);
+        }
+
+        public void Save(IEcsSystems systems)
+        {
+            UpdateProgress(systems);
+        }
+
+        private void UpdateProgress(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             var saveRequestFilter = world.Filter<SaveRequest>().Inc<BusinessComponent>().End();

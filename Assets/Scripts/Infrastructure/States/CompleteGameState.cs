@@ -15,6 +15,9 @@ namespace Scripts.Infrastructure.States
         {
             var systems = _services.Single<EcsSystemsProvider>().Systems;
             var world = systems.GetWorld();
+
+            if (world.GetEntitiesCount() == 0)
+                return;
             
             _services.Single<EntitiesSaveService>().SendSaveRequest();
             
