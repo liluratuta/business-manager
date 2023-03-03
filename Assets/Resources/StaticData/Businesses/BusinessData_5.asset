@@ -18,9 +18,9 @@ MonoBehaviour:
   BaseCost: 5000
   BaseIncome: 5000
   Improvements:
-  - NameKey: 
-    Cost: 0
-    Multiplier: 0
-  - NameKey: 
-    Cost: 0
-    Multiplier: 0
+  - NameKey: improvement5_1
+    Cost: 100000
+    Multiplier: 2
+  - NameKey: improvement5_2
+    Cost: 500000
+    Multiplier: 4

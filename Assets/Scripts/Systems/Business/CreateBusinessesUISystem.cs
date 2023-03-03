@@ -33,15 +33,28 @@ namespace Scripts.Systems.Business
             var uiProviders = world.GetPool<BusinessUIProviderComponent>();
             var businesses = world.GetPool<BusinessComponent>();
             var timers = world.GetPool<TimerComponent>();
-
+            var improvements = world.GetPool<ImprovementsComponent>();
+            
             foreach (var entity in businessesFilter)
             {
                 ref var uiProvider = ref uiProviders.Get(entity);
                 ref var businessComponent = ref businesses.Get(entity);
                 ref var timer = ref timers.Get(entity);
-
-                uiProvider.NameView.SetNameKey(_staticDataService.ForBusinessID(businessComponent.BusinessID).NameKey);
+                ref var improvementsComponent = ref improvements.Get(entity);
+                
+                var businessData = _staticDataService.ForBusinessID(businessComponent.BusinessID);
+                uiProvider.NameView.SetNameKey(businessData.NameKey);
                 uiProvider.TimerView.SetCurrentTime(timer.CurrentTime);
+
+                for (var improvementID = 0; improvementID < uiProvider.ImprovementButtons.Count; improvementID++)
+                {
+                    var improvementButton = uiProvider.ImprovementButtons[improvementID];
+                    var improvementData = businessData.Improvements[improvementID];
+                    improvementButton.SetNameKey(improvementData.NameKey);
+                    improvementButton.SetCost(improvementData.Cost);
+                    improvementButton.SetMultiplier(improvementData.Multiplier);
+                    improvementButton.SetPurchased(improvementsComponent.Purchased.Exists(x => x == improvementID));
+                }
             }
         }
     }

@@ -35,7 +35,9 @@ namespace Scripts.Services
 
         public BusinessProgress ForBusinessID(BusinessID businessID)
         {
-            var businessProgress = _progress.Businesses.FirstOrDefault(x => x.BusinessID == businessID);
+            var businessProgress = _progress
+                .Businesses
+                .FirstOrDefault(x => x.BusinessID == businessID);
 
             if (businessProgress != null)
                 return businessProgress;

@@ -1,4 +1,5 @@
-﻿using Leopotam.EcsLite;
+﻿using System.Collections.Generic;
+using Leopotam.EcsLite;
 using Scripts.Components.Business;
 using Scripts.Services;
 
@@ -43,9 +44,11 @@ namespace Scripts.Systems.Business
             ref var levelComponent = ref world.GetPool<LevelComponent>().Add(entity);
             ref var businessComponent = ref world.GetPool<BusinessComponent>().Add(entity);
             ref var timerComponent = ref world.GetPool<TimerComponent>().Add(entity);
-            
+            ref var improvementsComponent = ref world.GetPool<ImprovementsComponent>().Add(entity);
+
+            improvementsComponent.Purchased = new List<int>(progress.PurchasedImprovements);
             businessComponent.BusinessID = businessID;
-            
+
             world.GetPool<BusinessUIProviderComponent>().Add(entity);
             world.GetPool<LevelButtonStateComponent>().Add(entity);
 
@@ -56,6 +59,7 @@ namespace Scripts.Systems.Business
             levelComponent.NextLevelCost = _levelCostService.NextLevelCost(entity);
 
             businessComponent.Income = _incomeService.Income(entity);
+
 
             if (levelComponent.Level > 0)
                 world.GetPool<IsWorking>().Add(entity);

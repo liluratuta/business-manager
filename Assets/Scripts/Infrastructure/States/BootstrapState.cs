@@ -47,13 +47,15 @@ namespace Scripts.Infrastructure.States
             _services.RegisterSingle(new AssetsProvider());
             _services.RegisterSingle(new LocalizationService(_services.Single<StaticDataService>()));
             _services.RegisterSingle(new LevelUpService(_services.Single<EcsSystemsProvider>()));
+            _services.RegisterSingle(new ImprovementService(_services.Single<EcsSystemsProvider>()));
             
             _services.RegisterSingle(new UIFactory(
                 _services.Single<AssetsProvider>(), 
                 _services.Single<EcsSystemsProvider>(),
                 _services.Single<LocalizationService>(),
                 _services.Single<LevelUpService>(),
-                _services.Single<StaticDataService>()));
+                _services.Single<StaticDataService>(),
+                _services.Single<ImprovementService>()));
             
             _services.RegisterSingle(new LevelCostService(_services.Single<EcsSystemsProvider>(),
                 _services.Single<StaticDataService>()));

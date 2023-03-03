@@ -36,3 +36,29 @@ MonoBehaviour:
     Value: Balance
   - Key: reset_progress
     Value: Reset Progress
+  - Key: improvement_cost
+    Value: Cost
+  - Key: improvement_purchased
+    Value: Purchased
+  - Key: improvement_multiplier
+    Value: Income+
+  - Key: improvement1_1
+    Value: Soda Machine
+  - Key: improvement1_2
+    Value: Coffee Machine
+  - Key: improvement2_1
+    Value: Charging
+  - Key: improvement2_2
+    Value: Ice Cream Coffee
+  - Key: improvement3_1
+    Value: Molecular Cuisine
+  - Key: improvement3_2
+    Value: Classic Music Artists
+  - Key: improvement4_1
+    Value: Parking Attendants
+  - Key: improvement4_2
+    Value: Indoor Restaurant
+  - Key: improvement5_1
+    Value: Remove Competitors
+  - Key: improvement5_2
+    Value: Mathematical Algorithm

@@ -20,7 +20,7 @@ MonoBehaviour:
   Improvements:
   - NameKey: improvement1_1
     Cost: 50
-    Multiplier: 50
+    Multiplier: 0.5
   - NameKey: improvement1_2
     Cost: 400
-    Multiplier: 100
+    Multiplier: 1

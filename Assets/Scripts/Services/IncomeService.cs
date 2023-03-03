@@ -18,7 +18,21 @@ namespace Scripts.Services
         {
             ref var levelComponent = ref _world.GetPool<LevelComponent>().Get(entity);
             ref var business = ref _world.GetPool<BusinessComponent>().Get(entity);
-            return levelComponent.Level * _staticDataService.ForBusinessID(business.BusinessID).BaseIncome;
+            ref var improvementsComponent = ref _world.GetPool<ImprovementsComponent>().Get(entity);
+
+            var businessData = _staticDataService.ForBusinessID(business.BusinessID);
+
+            double improvementsMultiplier = 1;
+
+            for (var improvementID = 0; improvementID < businessData.Improvements.Length; improvementID++)
+            {
+                if (!improvementsComponent.Purchased.Exists(id => id == improvementID))
+                    continue;
+
+                improvementsMultiplier += businessData.Improvements[improvementID].Multiplier;
+            }
+
+            return levelComponent.Level * businessData.BaseIncome * improvementsMultiplier;
         }
     }
 }

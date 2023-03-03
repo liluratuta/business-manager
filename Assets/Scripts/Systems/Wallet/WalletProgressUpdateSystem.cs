@@ -3,7 +3,7 @@ using Scripts.Components;
 using Scripts.Components.Wallet;
 using Scripts.Services;
 
-namespace Scripts.Systems.Business
+namespace Scripts.Systems.Wallet
 {
     public class WalletProgressUpdateSystem : IEcsDestroySystem
     {

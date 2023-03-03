@@ -1,4 +1,5 @@
-﻿using Scripts.Views;
+﻿using System.Collections.Generic;
+using Scripts.Views;
 
 namespace Scripts.Components.Business
 {
@@ -9,5 +10,6 @@ namespace Scripts.Components.Business
         public LevelView LevelView;
         public LevelUpButtonView LevelUpButtonView;
         public IncomeView IncomeView;
+        public List<ImprovementButtonView> ImprovementButtons;
     }
 }

@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using Leopotam.EcsLite;
 using Scripts.Components.Business;
 using Scripts.Components.Wallet;
 using Scripts.Extensions;
-using Scripts.Infrastructure.States;
 using Scripts.Services;
 using UnityEngine;
 
@@ -13,12 +13,14 @@ namespace Scripts.Views.Factories
         private const string UIRootPath = "UI/UIRoot";
         private const string BusinessesWindowPath = "UI/BusinessesWindow";
         private const string BusinessViewPath = "UI/BusinessView";
+        private const string ImprovementButtonPath = "UI/ImprovementButton";
 
         private readonly AssetsProvider _assetsProvider;
         private readonly EcsWorld _world;
         private readonly LocalizationService _localizationService;
         private readonly LevelUpService _levelUpService;
         private readonly StaticDataService _staticDataService;
+        private readonly ImprovementService _improvementService;
 
         private Transform _uiRoot;
 
@@ -26,13 +28,15 @@ namespace Scripts.Views.Factories
             EcsSystemsProvider ecsSystemsProvider,
             LocalizationService localizationService,
             LevelUpService levelUpService,
-            StaticDataService staticDataService)
+            StaticDataService staticDataService,
+            ImprovementService improvementService)
         {
             _assetsProvider = assetsProvider;
             _world = ecsSystemsProvider.Systems.GetWorld();
             _localizationService = localizationService;
             _levelUpService = levelUpService;
             _staticDataService = staticDataService;
+            _improvementService = improvementService;
         }
 
         public BusinessView CreateBusinessView(int businessEntity, Transform container)
@@ -41,7 +45,8 @@ namespace Scripts.Views.Factories
             var view = Object.Instantiate(prefab, container);
 
             ref var uiProvider = ref _world.GetPool<BusinessUIProviderComponent>().Get(businessEntity);
-            ref BusinessComponent businessComponent = ref _world.GetPool<BusinessComponent>().Get(businessEntity);
+            ref var businessComponent = ref _world.GetPool<BusinessComponent>().Get(businessEntity);
+            var businessData = _staticDataService.ForBusinessID(businessComponent.BusinessID);
 
             var levelView = view.GetComponentInChildren<LevelView>();
             levelView.Init(_localizationService);
@@ -53,7 +58,7 @@ namespace Scripts.Views.Factories
             uiProvider.LevelUpButtonView = levelUpButtonView;
 
             var timerView = view.GetComponentInChildren<TimerView>();
-            timerView.SetTimerGoal(_staticDataService.ForBusinessID(businessComponent.BusinessID).RevenueDelay);
+            timerView.SetTimerGoal(businessData.RevenueDelay);
             uiProvider.TimerView = timerView;
 
             var incomeView = view.GetComponentInChildren<IncomeView>();
@@ -64,7 +69,32 @@ namespace Scripts.Views.Factories
             businessNameView.Init(_localizationService);
             uiProvider.NameView = businessNameView;
 
+            var improvementsContainer = view.GetComponentInChildren<ImprovementsContainerView>().transform;
+            var improvementButtonCount = businessData.Improvements.Length;
+
+            uiProvider.ImprovementButtons = new List<ImprovementButtonView>();
+                
+            for (var improvementID = 0; improvementID < improvementButtonCount; improvementID++)
+            {
+                var improvementButton =
+                    CreateImprovementButtonView(improvementsContainer, businessComponent.BusinessID, improvementID);
+                uiProvider.ImprovementButtons.Add(improvementButton);
+            }
+
             return view.GetComponent<BusinessView>();
+        }
+
+        private ImprovementButtonView CreateImprovementButtonView(Transform container, BusinessID businessID, int improvementID)
+        {
+            var prefab = _assetsProvider.FromResources(ImprovementButtonPath);
+            var view = Object.Instantiate(prefab, container);
+            var buttonView = view.GetComponent<ImprovementButtonView>();
+
+            buttonView.Init(_improvementService, _localizationService);
+            buttonView.SetBusinessID(businessID);
+            buttonView.SetImprovementID(improvementID);
+
+            return buttonView;
         }
 
         public BusinessesWindow CreateBusinessesWindow()
