@@ -45,6 +45,7 @@ namespace Scripts.Systems.Business
                 var businessData = _staticDataService.ForBusinessID(businessComponent.BusinessID);
                 uiProvider.NameView.SetNameKey(businessData.NameKey);
                 uiProvider.TimerView.SetCurrentTime(timer.CurrentTime);
+                uiProvider.IncomeView.SetIncome(businessComponent.Income);
 
                 for (var improvementID = 0; improvementID < uiProvider.ImprovementButtons.Count; improvementID++)
                 {
