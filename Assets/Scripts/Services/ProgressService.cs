@@ -69,7 +69,7 @@ namespace Scripts.Services
                 Businesses = new List<BusinessProgress>()
             };
 
-            var firstBusiness = NewBusinessProgress(BusinessID.Business1);
+            var firstBusiness = NewBusinessProgress(new BusinessID("business1"));
             firstBusiness.Level = 1;
             progress.Businesses.Add(firstBusiness);
 

@@ -27,11 +27,11 @@ namespace Scripts.Systems.Business
         {
             var world = systems.GetWorld();
 
-            CreateBusiness(BusinessID.Business1, world);
-            CreateBusiness(BusinessID.Business2, world);
-            CreateBusiness(BusinessID.Business3, world);
-            CreateBusiness(BusinessID.Business4, world);
-            CreateBusiness(BusinessID.Business5, world);
+            CreateBusiness(new BusinessID("business1"), world);
+            CreateBusiness(new BusinessID("business2"), world);
+            CreateBusiness(new BusinessID("business3"), world);
+            CreateBusiness(new BusinessID("business4"), world);
+            CreateBusiness(new BusinessID("business5"), world);
         }
 
         private void CreateBusiness(BusinessID businessID, EcsWorld world)
