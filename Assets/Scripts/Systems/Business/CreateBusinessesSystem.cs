@@ -26,12 +26,12 @@ namespace Scripts.Systems.Business
         public void Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
+            var startData = _staticDataService.GameStartData();
 
-            CreateBusiness(new BusinessID("business1"), world);
-            CreateBusiness(new BusinessID("business2"), world);
-            CreateBusiness(new BusinessID("business3"), world);
-            CreateBusiness(new BusinessID("business4"), world);
-            CreateBusiness(new BusinessID("business5"), world);
+            foreach (var businessID in startData.Businesses)
+            {
+                CreateBusiness(businessID, world);
+            }
         }
 
         private void CreateBusiness(BusinessID businessID, EcsWorld world)

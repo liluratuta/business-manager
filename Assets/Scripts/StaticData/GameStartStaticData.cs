@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Scripts.StaticData
 {
@@ -6,5 +7,9 @@ namespace Scripts.StaticData
     public class GameStartStaticData : ScriptableObject
     {
         public double StartBalance;
+
+        public List<BusinessID> Businesses = new List<BusinessID>();
+
+        public List<BusinessStartLevel> BusinessesStartLevel = new List<BusinessStartLevel>();
     }
 }

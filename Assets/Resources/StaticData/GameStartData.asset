@@ -13,3 +13,13 @@ MonoBehaviour:
   m_Name: GameStartData
   m_EditorClassIdentifier: 
   StartBalance: 5
+  Businesses:
+  - Value: business1
+  - Value: business2
+  - Value: business3
+  - Value: business4
+  - Value: business5
+  BusinessesStartLevel:
+  - BusinessID:
+      Value: business1
+    StartLevel: 1
