@@ -1,4 +1,5 @@
 ﻿using Scripts.ProgressData;
+using Scripts.StaticData;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,6 +9,7 @@ namespace Scripts.Services
     {
         private readonly SaveLoadService _saveLoadService;
         private readonly StaticDataService _staticDataService;
+
         private PlayerProgress _progress;
 
         public ProgressService(SaveLoadService saveLoadService, StaticDataService staticDataService)
@@ -52,10 +54,13 @@ namespace Scripts.Services
 
         private BusinessProgress NewBusinessProgress(BusinessID businessID)
         {
+            var businessStartLevelData = _staticDataService.GameStartData().BusinessesStartLevel.FirstOrDefault(x => x.BusinessID == businessID);
+            var startLevel = businessStartLevelData == null ? 0 : businessStartLevelData.StartLevel;
+
             return new BusinessProgress
             {
                 BusinessID = businessID,
-                Level = 0,
+                Level = startLevel,
                 TimerProgress = 0,
                 PurchasedImprovements = new List<int>()
             };
@@ -68,10 +73,6 @@ namespace Scripts.Services
                 WalletAmount = _staticDataService.GameStartData().StartBalance,
                 Businesses = new List<BusinessProgress>()
             };
-
-            var firstBusiness = NewBusinessProgress(BusinessID.Business1);
-            firstBusiness.Level = 1;
-            progress.Businesses.Add(firstBusiness);
 
             return progress;
         }

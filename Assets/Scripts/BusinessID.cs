@@ -1,12 +1,39 @@
-﻿namespace Scripts
+﻿using System;
+
+namespace Scripts
 {
-    public enum BusinessID
+    [Serializable]
+    public class BusinessID
     {
-        None = 0,
-        Business1 = 1,
-        Business2 = 2,
-        Business3 = 3,
-        Business4 = 4,
-        Business5 = 5
+        public string Value;
+
+        public BusinessID(string id)
+        {
+            Value = id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var item = obj as BusinessID;
+
+            if (item == null)
+                return false;
+
+            return item.Value.Equals(Value);
+        }
+
+        public override int GetHashCode() =>
+            Value.GetHashCode();
+
+        public static bool operator ==(BusinessID left, BusinessID right)
+        {
+            if (left is null)
+                return right is null;
+
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(BusinessID left, BusinessID right) =>
+            !(left == right);
     }
 }

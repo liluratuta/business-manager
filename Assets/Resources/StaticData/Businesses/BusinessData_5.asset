@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c9125ce4e59304c8f357773c92106e, type: 3}
   m_Name: BusinessData_5
   m_EditorClassIdentifier: 
-  BusinessID: 5
+  BusinessID:
+    Value: business5
   NameKey: business5
   RevenueDelay: 30
   BaseCost: 5000
